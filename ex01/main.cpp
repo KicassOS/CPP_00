@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pszleper < pszleper@student.42.fr >        +#+  +:+       +#+        */
+/*   By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 00:23:12 by pszleper          #+#    #+#             */
-/*   Updated: 2023/04/24 17:00:51 by pszleper         ###   ########.fr       */
+/*   Updated: 2023/04/27 04:53:17 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,40 @@
 
 void	ft_print_help()
 {
-	std::cout << "Usage: ./Phonebook OPERATION\n" << "OPERATION can be only be one of the following (case-sensitive):\n" \
+	std::cout << "Usage: ./Phonebook\n" << "Once open, you can type one of the following (case-sensitive) commands:\n" \
 	<< "ADD: add a new contact\nSEARCH: find a contact and display its' information\nEXIT: exit the program and delete all contacts" << std::endl;
 }
 
-void	ft_validate_input(std::string argv_1)
+void	ft_handle_input(std::string input)
 {
-	if (argv_1 != "ADD" && argv_1 != "SEARCH" && argv_1 != "EXIT")
+	if (input == "ADD")
 	{
-		ft_print_help();
-		exit(EXIT_FAILURE);
+		std::cout << "You've chosen to add a contact, please fill out its' information:" << std::endl;
+
+	}
+	if (input == "SEARCH")
+	{
+		std::cout << "You've chosen to search for a contact" << std::endl;
 	}
 }
 
 int	main(int argc, char **argv)
 {
+	(void) argv;
 	// Phonebook	Phonebook;
-	if (argc != 2)
+	std::string		input;
+
+	if (argc != 1)
 	{
 		ft_print_help();
-		return (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
-	std::string	input = argv[1];
-	ft_validate_input(input);
+	std::cout << "Phonebook open, do you wish to ADD a new contact, SEARCH a contact, or EXIT?" << std::endl;
+	std::cin >> input;
+	while (input != "EXIT")
+	{
+		ft_handle_input(input);
+		std::cin >> input;
+	}
 	return (EXIT_SUCCESS);
 }
