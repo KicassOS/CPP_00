@@ -6,7 +6,7 @@
 /*   By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 00:23:12 by pszleper          #+#    #+#             */
-/*   Updated: 2023/04/27 04:53:17 by pszleper         ###   ########.fr       */
+/*   Updated: 2023/04/27 17:11:03 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,13 @@ void	ft_handle_input(std::string input)
 {
 	if (input == "ADD")
 	{
-		std::cout << "You've chosen to add a contact, please fill out its' information:" << std::endl;
+		std::string	input;
+		Contact		new_contact;
 
+		std::cout << "You've chosen to add a contact, please fill out its' information:" << std::endl;
+		std::cout << "Please input the contact's first name:" << std::endl;
+		std::cin >> input;
+		new_contact.set_first_name(input);
 	}
 	if (input == "SEARCH")
 	{

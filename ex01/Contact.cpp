@@ -3,13 +3,94 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pszleper < pszleper@student.42.fr >        +#+  +:+       +#+        */
+/*   By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 02:41:38 by pszleper          #+#    #+#             */
-/*   Updated: 2023/04/18 03:39:40 by pszleper         ###   ########.fr       */
+/*   Updated: 2023/04/29 01:22:18 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
+#include <iostream>
+#include <string>
+
+Contact::Contact(void)
+{
+	this->_first_name = "";
+	this->_last_name = "";
+	this->_nickname = "";
+	this->_phone_number = "";
+	this->_darkest_secret = "";
+}
+
+Contact::Contact(const Contact& contact)
+{
+	this->_first_name = contact._first_name;
+	this->_last_name = contact._last_name;
+	this->_nickname = contact._nickname;
+	this->_phone_number = contact._phone_number;
+	this->_darkest_secret = contact._darkest_secret;
+}
 
 
+
+std::string	Contact::get_first_name(void)
+{
+	return (this->_first_name);
+}
+
+std::string	Contact::get_last_name(void)
+{
+	return (this->_last_name);
+}
+
+std::string	Contact::get_nickname(void)
+{
+	return (this->_nickname);
+}
+
+std::string	Contact::get_phone_number(void)
+{
+	return (this->_phone_number);
+}
+
+std::string	Contact::get_darkest_secret(void)
+{
+	return (this->_darkest_secret);
+}
+
+
+void	Contact::set_first_name(std::string first_name)
+{
+	if (first_name.length() == 0)
+		std::cout << "Contact's first name cannot be empty" << std::endl;
+	this->_first_name = first_name;
+}
+
+void	Contact::set_last_name(std::string last_name)
+{
+	if (last_name.length() == 0)
+		std::cout << "Contact's last name cannot be empty" << std::endl;
+	this->_last_name = last_name;
+}
+
+void	Contact::set_nickname(std::string nickname)
+{
+	if (nickname.length() == 0)
+		std::cout << "Contact's nickname cannot be empty" << std::endl;
+	this->_nickname = nickname;
+}
+
+void	Contact::set_phone_number(std::string phone_number)
+{
+	if (phone_number.length() == 0)
+		std::cout << "Contact's phone number cannot be empty" << std::endl;
+	this->_phone_number = phone_number;
+}
+
+void	Contact::set_darkest_secret(std::string darkest_secret)
+{
+	if (darkest_secret.length() == 0)
+		std::cout << "Contact's darkest secret cannot be empty" << std::endl;
+	this->_darkest_secret = darkest_secret;
+}
