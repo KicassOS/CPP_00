@@ -6,7 +6,7 @@
 /*   By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 00:23:12 by pszleper          #+#    #+#             */
-/*   Updated: 2023/04/27 17:11:03 by pszleper         ###   ########.fr       */
+/*   Updated: 2023/05/03 01:44:55 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <string>
 #include <cstring>
 #include <iostream>
+
+#define PROMPT "Do you wish to ADD a new contact, SEARCH a contact, or EXIT?"
 
 void	ft_print_help()
 {
@@ -30,15 +32,39 @@ void	ft_handle_input(std::string input)
 		std::string	input;
 		Contact		new_contact;
 
-		std::cout << "You've chosen to add a contact, please fill out its' information:" << std::endl;
-		std::cout << "Please input the contact's first name:" << std::endl;
-		std::cin >> input;
-		new_contact.set_first_name(input);
+		std::cout << "\nYou've chosen to add a contact, please fill out its' information:" << std::endl;
+		std::cout << "Please input the contact's first name" << std::endl;
+		std::getline(std::cin, input);
+		if (!new_contact.set_first_name(input))
+			return;
+		std::cout << "Please input the contact's last name" << std::endl;
+		std::getline(std::cin, input);
+		if (!new_contact.set_last_name(input))
+			return;
+		std::cout << "Please input the contact's nickname" << std::endl;
+		std::getline(std::cin, input);
+		if (!new_contact.set_nickname(input))
+			return;
+		std::cout << "Please input the contact's phone number" << std::endl;
+		std::getline(std::cin, input);
+		if (!new_contact.set_phone_number(input))
+			return;
+		std::cout << "Please input the contact's darkest secret" << std::endl;
+		std::getline(std::cin, input);
+		if (!new_contact.set_darkest_secret(input))
+			return;
+		// Phonebook.add_contact(&new_contact);
+		std::cout << std::endl << "Contact " << new_contact.get_first_name() << " " << new_contact.get_last_name() << " added!" << std::endl;
+		return ;
 	}
-	if (input == "SEARCH")
+	else if (input == "SEARCH")
 	{
 		std::cout << "You've chosen to search for a contact" << std::endl;
 	}
+	else if (input == "EXIT")
+		exit(EXIT_SUCCESS);
+	else
+		std::cout << "You must input either ADD, SEARCH or EXIT in uppercase" << std::endl;
 }
 
 int	main(int argc, char **argv)
@@ -47,17 +73,17 @@ int	main(int argc, char **argv)
 	// Phonebook	Phonebook;
 	std::string		input;
 
+std::cout << "Hello" << " " + 8 << "World" <<std::endl;
 	if (argc != 1)
 	{
 		ft_print_help();
-		exit(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
-	std::cout << "Phonebook open, do you wish to ADD a new contact, SEARCH a contact, or EXIT?" << std::endl;
-	std::cin >> input;
-	while (input != "EXIT")
+	while (true)
 	{
+		std::cout << PROMPT << std::endl;
+		std::getline(std::cin, input);
 		ft_handle_input(input);
-		std::cin >> input;
 	}
 	return (EXIT_SUCCESS);
 }
