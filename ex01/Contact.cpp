@@ -6,7 +6,7 @@
 /*   By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 02:41:38 by pszleper          #+#    #+#             */
-/*   Updated: 2023/05/03 02:11:01 by pszleper         ###   ########.fr       */
+/*   Updated: 2023/05/11 07:33:54 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,13 @@ Contact::Contact(const Contact& contact)
 
 Contact&	Contact::operator=(const Contact& contact)
 {
-	*this = contact;
+	if (this == &contact)
+		return (*this);
+	this->_first_name = contact.get_first_name();
+	this->_last_name = contact.get_last_name();
+	this->_nickname = contact.get_nickname();
+	this->_phone_number = contact.get_phone_number();
+	this->_darkest_secret = contact.get_darkest_secret();
 	return (*this);
 }
 
@@ -45,27 +51,27 @@ Contact::~Contact(void)
 	return ;
 }
 
-std::string	Contact::get_first_name(void)
+std::string	Contact::get_first_name(void) const
 {
 	return (this->_first_name);
 }
 
-std::string	Contact::get_last_name(void)
+std::string	Contact::get_last_name(void) const
 {
 	return (this->_last_name);
 }
 
-std::string	Contact::get_nickname(void)
+std::string	Contact::get_nickname(void) const
 {
 	return (this->_nickname);
 }
 
-std::string	Contact::get_phone_number(void)
+std::string	Contact::get_phone_number(void) const
 {
 	return (this->_phone_number);
 }
 
-std::string	Contact::get_darkest_secret(void)
+std::string	Contact::get_darkest_secret(void) const
 {
 	return (this->_darkest_secret);
 }
@@ -129,4 +135,33 @@ bool	Contact::set_darkest_secret(std::string darkest_secret)
 	}
 	this->_darkest_secret = darkest_secret;
 	return (true);
+}
+
+void	ft_format_contact_field(std::ostream& ostream, std::string field)
+{
+	int	padding = field.length() - 10;
+	if (padding < 10)
+		padding *= -1;
+	else
+		padding = 0;
+
+	for (int i = 0; i < padding; i++)
+		ostream << " ";
+	for (int i = 0; field[i] && i < 9; i++)
+		ostream << field[i];
+	if (field.length() > 10)
+		ostream << ".";
+	else if (field.length() ==10)
+		ostream << field[9];
+}
+
+std::ostream& operator<<(std::ostream& ostream, Contact const & rhs)
+{
+	ft_format_contact_field(ostream, rhs.get_first_name());
+	ostream << "|";
+	ft_format_contact_field(ostream, rhs.get_last_name());
+	ostream << "|";
+	ft_format_contact_field(ostream, rhs.get_nickname());
+	std::cout << "|";
+	return (ostream);
 }

@@ -6,7 +6,7 @@
 /*   By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 00:23:12 by pszleper          #+#    #+#             */
-/*   Updated: 2023/05/03 01:44:55 by pszleper         ###   ########.fr       */
+/*   Updated: 2023/05/11 08:08:05 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <string>
 #include <cstring>
 #include <iostream>
+#include <stdbool.h>
 
 #define PROMPT "Do you wish to ADD a new contact, SEARCH a contact, or EXIT?"
 
@@ -25,7 +26,7 @@ void	ft_print_help()
 	<< "ADD: add a new contact\nSEARCH: find a contact and display its' information\nEXIT: exit the program and delete all contacts" << std::endl;
 }
 
-void	ft_handle_input(std::string input)
+void	ft_handle_input(std::string input, Phonebook& Phonebook)
 {
 	if (input == "ADD")
 	{
@@ -53,37 +54,44 @@ void	ft_handle_input(std::string input)
 		std::getline(std::cin, input);
 		if (!new_contact.set_darkest_secret(input))
 			return;
-		// Phonebook.add_contact(&new_contact);
-		std::cout << std::endl << "Contact " << new_contact.get_first_name() << " " << new_contact.get_last_name() << " added!" << std::endl;
+		std::cout << std::endl << "Contact " << new_contact.get_first_name() << " " << new_contact.get_last_name() << " successfully added!" << std::endl;
+		Phonebook.add_contact(new_contact);
 		return ;
 	}
 	else if (input == "SEARCH")
 	{
-		std::cout << "You've chosen to search for a contact" << std::endl;
+		if (Phonebook.get_nb_contacts() == 0)
+		{
+			std::cout << "The phonebook is empty" << std::endl;
+			return;
+		}
+		bool search_index_valid = Phonebook.search_contact();
+		if (search_index_valid == false)
+			return;
 	}
 	else if (input == "EXIT")
 		exit(EXIT_SUCCESS);
-	else
-		std::cout << "You must input either ADD, SEARCH or EXIT in uppercase" << std::endl;
 }
 
 int	main(int argc, char **argv)
 {
 	(void) argv;
-	// Phonebook	Phonebook;
-	std::string		input;
+	Phonebook	Phonebook;
+	std::string	input;
 
-std::cout << "Hello" << " " + 8 << "World" <<std::endl;
 	if (argc != 1)
 	{
 		ft_print_help();
 		return (EXIT_FAILURE);
 	}
+	std::cout << "Welcome to Phonebook!" << std::endl;
 	while (true)
 	{
 		std::cout << PROMPT << std::endl;
 		std::getline(std::cin, input);
-		ft_handle_input(input);
+		if (std::cin.eof())
+			exit(EXIT_SUCCESS);
+		ft_handle_input(input, Phonebook);
 	}
 	return (EXIT_SUCCESS);
 }
