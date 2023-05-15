@@ -6,7 +6,7 @@
 /*   By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 00:23:12 by pszleper          #+#    #+#             */
-/*   Updated: 2023/05/11 08:08:05 by pszleper         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:48:41 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,33 @@ void	ft_handle_input(std::string input, Phonebook& Phonebook)
 		std::cout << "\nYou've chosen to add a contact, please fill out its' information:" << std::endl;
 		std::cout << "Please input the contact's first name" << std::endl;
 		std::getline(std::cin, input);
-		if (!new_contact.set_first_name(input))
+		if (std::cin.eof())
+			exit(EXIT_SUCCESS);
+		else if (!new_contact.set_first_name(input))
 			return;
 		std::cout << "Please input the contact's last name" << std::endl;
 		std::getline(std::cin, input);
-		if (!new_contact.set_last_name(input))
+		if (std::cin.eof())
+			exit(EXIT_SUCCESS);
+		else if (!new_contact.set_last_name(input))
 			return;
 		std::cout << "Please input the contact's nickname" << std::endl;
 		std::getline(std::cin, input);
-		if (!new_contact.set_nickname(input))
+		if (std::cin.eof())
+			exit(EXIT_SUCCESS);
+		else if (!new_contact.set_nickname(input))
 			return;
 		std::cout << "Please input the contact's phone number" << std::endl;
 		std::getline(std::cin, input);
-		if (!new_contact.set_phone_number(input))
+		if (std::cin.eof())
+			exit(EXIT_SUCCESS);
+		else if (!new_contact.set_phone_number(input))
 			return;
 		std::cout << "Please input the contact's darkest secret" << std::endl;
 		std::getline(std::cin, input);
-		if (!new_contact.set_darkest_secret(input))
+		if (std::cin.eof())
+			exit(EXIT_SUCCESS);
+		else if (!new_contact.set_darkest_secret(input))
 			return;
 		std::cout << std::endl << "Contact " << new_contact.get_first_name() << " " << new_contact.get_last_name() << " successfully added!" << std::endl;
 		Phonebook.add_contact(new_contact);

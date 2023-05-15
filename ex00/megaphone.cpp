@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   megaphone.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pszleper < pszleper@student.42.fr >        +#+  +:+       +#+        */
+/*   By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 16:45:27 by pszleper          #+#    #+#             */
-/*   Updated: 2023/04/12 04:18:44 by pszleper         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:38:11 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <cstdlib>
 
 void	ft_handle_no_arg(int argc, char **argv)
@@ -42,8 +43,9 @@ int	main(int argc, char **argv)
 	ft_handle_no_arg(argc, argv);
 	for (int i = 1; i < argc; i++)
 	{
+		str = argv[i];
 		for (int j = 0; argv[i][j] != '\0'; j++)
-			argv[i][j] = toupper(argv[i][j]);
+			argv[i][j] = std::toupper(str[j]);
 		std::cout << argv[i];
 	}
 	std::cout << std::endl;
