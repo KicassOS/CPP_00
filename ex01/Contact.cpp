@@ -6,7 +6,7 @@
 /*   By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 02:41:38 by pszleper          #+#    #+#             */
-/*   Updated: 2023/05/15 18:11:56 by pszleper         ###   ########.fr       */
+/*   Updated: 2023/05/11 07:33:54 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ Contact::Contact(void)
 
 Contact::Contact(const Contact& contact)
 {
-	if (this == &contact)
-		return (*this);
 	this->_first_name = contact._first_name;
 	this->_last_name = contact._last_name;
 	this->_nickname = contact._nickname;
