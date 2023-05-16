@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Phonebook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pszleper <pszleper@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pszleper < pszleper@student.42.fr >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 00:23:17 by pszleper          #+#    #+#             */
-/*   Updated: 2023/05/15 16:21:38 by pszleper         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:22:16 by pszleper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ bool	Phonebook::search_contact(void)
 	std::getline(std::cin, input);
 	if (std::cin.eof())
 		exit(EXIT_SUCCESS);
-	int	index_selected = atoi(input.c_str());
-	if (index_selected > this->_nb_contacts || index_selected == 0)
+	int	index_selected = std::atoi(input.c_str());
+	if (index_selected <= 0 || index_selected > this->_nb_contacts)
 	{
 		std::cout << "You've provided an invalid contact index. Returning to main menu..." << std::endl;
 		return (false);
